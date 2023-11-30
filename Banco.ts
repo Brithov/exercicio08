@@ -12,10 +12,10 @@ class Conta {
 		 
 		//Implementação solicitada na questão 06
 		if(saldoInicial <  0){
-			throw new ContaInexistenteError("Valor nao pode ser negativo! ");
+			throw new Error("Valor nao pode ser negativo! ");
 		}
-	}
-
+	} 
+	
 	sacar(valor: number): void {
 		//Implementação solicitada na questão 06
 		if(valor < 0){
@@ -342,4 +342,4 @@ class ContaImposto extends Conta {
 	banco.inserir(conta1);
 
 
-*/
+*/'

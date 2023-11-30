@@ -124,8 +124,8 @@ function validarTipoConta(entrada: string): string {
 class Banco {
 
 	private contas: Conta[] = [];
-	private CAMINHO_ARQUIVO: string = "./ImportContas.csv";
-	private DESTINO_ARQUIVO: string = "./ExportContas.csv";
+	//private CAMINHO_ARQUIVO: string = "./ImportContas.csv";
+	//private DESTINO_ARQUIVO: string = "./ExportContas.csv";
 
 	public inserir(conta: Conta): void {
 		try {
@@ -254,54 +254,7 @@ class Banco {
 		return this.getTotalDepositado() / this.getTotalContas();
 	}
 
-	public carregarDeArquivo() {
-		const arquivo: string = fs.readFileSync(this.CAMINHO_ARQUIVO, 'utf-8');
-		//const linhas: string[] = arquivo.split('\n');
-		const linhas: string[] = arquivo.split('\r\n');
-		console.log("Iniciando leitura de arquivo");
-
-		for (let i: number = 0; i < linhas.length; i++) {
-			let linhaConta: string[] = linhas[i].split(";");
-			let conta!: Conta;
-			let tipo: string = linhaConta[2];
-			if (tipo == 'C') {
-				conta = new Conta(linhaConta[0], parseFloat(linhaConta[1]));
-			} else if (tipo == 'CP') {
-				conta = new Poupanca(linhaConta[0], parseFloat(linhaConta[1]), parseFloat(linhaConta[3]));
-			} else if (tipo == 'CI') {
-				conta = new ContaImposto(linhaConta[0], parseFloat(linhaConta[1]), parseFloat(linhaConta[3]));
-			}
-
-			this.inserir(conta);
-			console.log(`Conta ${conta.numero} carregada`);
-		}
-
-		console.log("fim do arquivo")
-
-	}
-
-	public salvarEmArquivo() {
-		console.log("Iniciando a gravação de contas em arquivo.")
-		let stringContas: string = "";
-		let linha: string = "";
-
-		for (let conta of this.contas) {
-			if (conta instanceof Poupanca) {
-				linha = `${conta.numero};${conta.saldo};CP;${conta.taxaDeJuros}\r\n`;
-			} else if ((conta instanceof ContaImposto)) {
-				linha = `${conta.numero};${conta.saldo};CI;${conta.taxaDesconto}\r\n`;
-			} else {
-				linha = `${conta.numero};${conta.saldo};C\r\n`;
-			}
-
-			stringContas += linha;
-		}
-		//deleta os últimos \r\n da string que vai pro arquivo, evitando que grave uma linha vazia
-		stringContas = stringContas.slice(0, stringContas.length - 2);
-
-		fs.writeFileSync(this.DESTINO_ARQUIVO, stringContas, 'utf-8');
-		console.log("Contas salvas em arquivo.")
-	}
+	
 }
 class Poupanca extends Conta {
 	private _taxaDeJuros: number;
