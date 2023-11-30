@@ -1,0 +1,22 @@
+{
+  "name": "curso-typescript-poo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+   "devDependencies": {
+    "nodemon": "^2.0.12",
+    "typescript": "^5.2.2",
+    "@types/node": "^16.7.13"
+  }
+}
+
+
